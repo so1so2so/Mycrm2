@@ -9,10 +9,10 @@ from django.contrib.auth.models import User
 
 class Customer(models.Model):
     '''客户信息表'''
-    name = models.CharField(max_length=32, blank=True, null=True)
-    qq = models.CharField(max_length=64, unique=True)
-    qq_name = models.CharField(max_length=64, blank=True, null=True)
-    phone = models.CharField(max_length=64, blank=True, null=True)
+    name = models.CharField(max_length=32, blank=True, null=True,verbose_name='用户名')
+    qq = models.CharField(verbose_name='QQ号',max_length=64, unique=True)
+    qq_name = models.CharField(max_length=64, blank=True, null=True,verbose_name='QQ名称')
+    phone = models.CharField(max_length=64, blank=True, null=True,verbose_name='电话号码')
     source_choices = ((0, '转介绍'),
                       (1, 'QQ群'),
                       (2, '官网'),
@@ -27,7 +27,7 @@ class Customer(models.Model):
 
     consult_course = models.ForeignKey("Course", verbose_name="咨询课程")
     content = models.TextField(verbose_name="咨询详情")
-    tags = models.ManyToManyField("Tag", blank=True, null=True)
+    tags = models.ManyToManyField("Tag", blank=True)
     status_choices = ((0, '已报名'),
                       (1, '未报名'),
                       )
@@ -219,7 +219,7 @@ class UserProfile(models.Model):
     '''账号表'''
     user = models.OneToOneField(User)
     name = models.CharField(max_length=32)
-    roles = models.ManyToManyField("Role", blank=True, null=True)
+    roles = models.ManyToManyField("Role", blank=True)
 
     def __str__(self):
         return self.name
