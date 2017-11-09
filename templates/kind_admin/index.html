@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div> {% for app_name,table in list.items %}
+    <div>
+        app_name(应用名称):{{ app_name }}
+        <div>table(表对象) :{{ table }}</div>
+
+    </div>
+    {% for table_name,table_class in table.items %}
+        <div>
+            <a href="{% url 'admin_obj' app_name table_name %}">
+                table_name(表名称):{{ table_name }}
+            </a>
+            <div>
+                table_class(选择的内容):{{ table_class.list_display }}
+            </div>
+        </div>
+
+    {% endfor %}
+
+{% endfor %}
+</div>
+</body>
+</html>

@@ -27,7 +27,7 @@ class Customer(models.Model):
 
     consult_course = models.ForeignKey("Course", verbose_name="咨询课程")
     content = models.TextField(verbose_name="咨询详情")
-    tags = models.ManyToManyField("Tag", blank=True, null=True)
+    tags = models.ManyToManyField("Tag", blank=True)
     status_choices = ((0, '已报名'),
                       (1, '未报名'),
                       )
@@ -219,7 +219,7 @@ class UserProfile(models.Model):
     '''账号表'''
     user = models.OneToOneField(User)
     name = models.CharField(max_length=32)
-    roles = models.ManyToManyField("Role", blank=True, null=True)
+    roles = models.ManyToManyField("Role", blank=True)
 
     def __str__(self):
         return self.name
